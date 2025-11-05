@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Infografía — Plantilla HTML</title>
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#12141a;
+      --ink:#e8f0ff;
+      --muted:#9fb1cc;
+      --brand:#ff7a00; /* naranja solicitado a menudo */
+      --accent:#36c;
+      --good:#16a34a;
+      --warn:#f59e0b;
+      --bad:#dc2626;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:radial-gradient(1200px 600px at 75% -10%, #1b1f2a 0%, #0b0c10 60%);color:var(--ink);font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial}
+    .wrap{max-width:var(--maxw);margin:auto;padding:24px}
+    .infographic{display:grid;gap:22px}
+
+    /* Header */
+    .hero{background:linear-gradient(135deg, rgba(255,122,0,.18), rgba(70,90,255,.14));border:1px solid rgba(255,255,255,.08);padding:28px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .eyebrow{letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;font-size:.78rem}
+    h1{margin:.2rem 0 .6rem;font-size:clamp(1.6rem, 2.6vw + .8rem, 2.6rem)}
+    .subtitle{color:var(--muted);max-width:65ch}
+
+    /* KPI cards */
+    .kpis{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:16px}
+    @media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:540px){.kpis{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .kpi .label{color:var(--muted);font-size:.8rem}
+    .kpi .value{font-size:clamp(1.4rem, 3.2vw + .6rem, 2.8rem);font-weight:800;margin-top:.2rem}
+    .trend{display:inline-flex;align-items:center;gap:6px;font-weight:700;margin-top:8px}
+    .trend.up{color:var(--good)}
+    .trend.flat{color:var(--warn)}
+    .trend.down{color:var(--bad)}
+    .chip{display:inline-block;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:.28rem .55rem;border-radius:999px;color:var(--muted);font-size:.78rem}
+
+    /* Comparison bars */
+    .compare{display:grid;grid-template-columns:1.2fr 2fr;gap:16px;align-items:center}
+    @media (max-width:760px){.compare{grid-template-columns:1fr}}
+    .bar{height:14px;background:#1c2230;border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+    .bar > span{display:block;height:100%;background:linear-gradient(90deg, var(--brand), #ffae42)}
+
+    /* Timeline */
+    .timeline{display:grid;gap:14px;padding-left:6px}
+    .event{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:start}
+    @media (max-width:600px){.event{grid-template-columns:1fr}}
+    .dot{--c:var(--accent);display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px rgba(54,102,204,.18)}
+    .event time{color:var(--muted);font-weight:700}
+    .event .desc{background:var(--panel);border:1px solid rgba(255,255,255,.08);padding:12px 14px;border-radius:14px}
+
+    /* Quote */
+    blockquote{margin:0;padding:18px 20px;border-left:4px solid var(--brand);background:rgba(255,255,255,.04);border-radius:0 var(--radius) var(--radius) 0}
+    blockquote footer{color:var(--muted);margin-top:8px}
+
+    /* Mini chart (pure CSS columns) */
+    .bars{display:flex;align-items:flex-end;gap:10px;height:140px;padding:10px 12px;border-radius:var(--radius);background:var(--panel);border:1px solid rgba(255,255,255,.08)}
+    .bars .col{flex:1;display:flex;flex-direction:column;gap:6px;align-items:center}
+    .bars .col .stick{width:20px;border-radius:6px 6px 0 0;background:linear-gradient(180deg, #ffae42, var(--brand))}
+    .bars .label{font-size:.76rem;color:var(--muted)}
+
+    /* Footer */
+    .sources{color:var(--muted);font-size:.82rem}
+    .sources a{color:var(--ink)}
+
+    /* Print */
+    @media print{
+      body{background:white;color:#111}
+      .hero,.card,.bars,.event .desc{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="infographic">
+      <!-- ENCABEZADO -->
+      <header class="hero">
+        <div class="eyebrow">Infografía</div>
+        <h1>Secuestro extorsivo en Puerto Iguazú — Lo confirmado hasta ahora</h1>
+        <p class="subtitle">Una mujer de 59 años fue privada de su libertad y liberada horas después, sana y salva. Los captores exigieron un rescate de <strong>USD 200.000</strong> y enviaron a la familia una foto con un arma apuntando a su cabeza. Esta infografía resume los datos clave aportados por fuentes judiciales y de seguridad. <em>En desarrollo.</em></p>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <span class="chip">Actualizado: 4 nov 2025 — 09:30</span>
+          <span class="chip">Lugar: Barrio Los Trabajadores (calle Los Mecánicos)</span>
+          <span class="chip">Fuentes: judiciales y fuerzas de seguridad</span>
+        </div>
+      </header>
+
+      <!-- KPIs PRINCIPALES -->
+      <section class="kpis">
+        <article class="card kpi">
+          <div class="label">Rescate exigido</div>
+          <div class="value">USD 200.000</div>
+          <div class="trend up" aria-label="dato confirmado">● confirmado</div>
+        </article>
+        <article class="card kpi">
+          <div class="label">Víctima</div>
+          <div class="value">Mujer, 59 años</div>
+          <div class="trend flat">sana y salva</div>
+        </article>
+        <article class="card kpi">
+          <div class="label">Duración</div>
+          <div class="value">horas</div>
+          <div class="trend flat">en verificación</div>
+        </article>
+        <article class="card kpi">
+          <div class="label">Sospechosos</div>
+          <div class="value">presuntos brasileños</div>
+          <div class="trend down">búsqueda</div>
+        </article>
+      </section>
+
+      <!-- COMPARATIVA SIMPLE -->
+      <section class="card">
+        <h2 style="margin-top:0">Hechos confirmados</h2>
+        <ul style="margin:0;padding-left:18px;line-height:1.6">
+          <li>El hecho comenzó cuando la víctima y su hermana fueron a una estética a hacerse las uñas, cerca de las <strong>19:00</strong>.</li>
+          <li>Ingresaron al local hombres armados, <em>presuntamente de Brasil</em>, preguntando por la <strong>nieta de 4 años</strong> de la víctima.</li>
+          <li>Redujeron y ataron a la hermana y a la dueña de la estética; las encerraron en el baño.</li>
+          <li>Se llevaron a la mujer y exigieron <strong>USD 200.000</strong> de rescate.</li>
+          <li>La familia recibió una <strong>foto</strong> donde se ve a la víctima con un arma apuntando a la cabeza.</li>
+          <li>Tras un amplio operativo de seguridad, la víctima fue <strong>liberada horas después sana y salva</strong>.</li>
+        </ul>
+      </section>
+
+      <!-- TIMELINE / HITOS -->
+      <section class="card">
+        <h2 style="margin-top:0">Cronología</h2>
+        <div class="timeline">
+          <div class="event">
+            <time>~19:00</time>
+            <div class="desc"><span class="dot" aria-hidden="true">🟠</span> La víctima y su hermana llegan a la estética (Barrio Los Trabajadores, calle Los Mecánicos).</div>
+          </div>
+          <div class="event">
+            <time>Minutos después</time>
+            <div class="desc"><span class="dot" aria-hidden="true">🟠</span> Ingresan hombres armados; reducen a la hermana y a la dueña, las atan y encierran en el baño.</div>
+          </div>
+          <div class="event">
+            <time>+</time>
+            <div class="desc"><span class="dot" aria-hidden="true">🟠</span> Los captores se llevan a la mujer y exigen rescate de USD 200.000.</div>
+          </div>
+          <div class="event">
+            <time>+</time>
+            <div class="desc"><span class="dot" aria-hidden="true">🟠</span> La familia recibe una foto con un arma apuntando a la cabeza de la víctima.</div>
+          </div>
+          <div class="event">
+            <time>Horas después</time>
+            <div class="desc"><span class="dot" aria-hidden="true">🟠</span> Amplio operativo de fuerzas de seguridad ➜ la víctima es liberada sana y salva.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MINI CHART COLUMNS (EDITABLE ALTURA %) -->
+      <section class="card">
+        <h2 style="margin-top:0">Claves de investigación (sin especulación)</h2>
+        <ul style="margin:0;padding-left:18px;line-height:1.6">
+          <li>Hipótesis principal: banda con posibles vínculos transfronterizos. <em>En análisis.</em></li>
+          <li>Escena primaria: estética del Barrio Los Trabajadores (calle Los Mecánicos).</li>
+          <li>Modalidad: secuestro extorsivo con intimidación y prueba de vida fotográfica.</li>
+          <li>Víctima liberada; se relevan cámaras, rutas de escape y comunicaciones.</li>
+        </ul>
+      </section>
+
+      <!-- CITA DESTACADA -->
+      <section class="card">
+        <blockquote>
+          Dato clave: los delincuentes reclamaron <strong>USD 200.000</strong> y enviaron una fotografía donde se observa a la víctima bajo amenaza con arma de fuego.
+          <footer>— Síntesis del expediente en curso (fuentes judiciales)</footer>
+        </blockquote>
+      </section>
+
+      <!-- FUENTES / NOTAS -->
+      <section class="sources">
+        <strong>Estado:</strong> información en desarrollo. Esta pieza se actualizará con resoluciones judiciales y partes oficiales. <br/>
+        <strong>Fuentes:</strong> testimonios aportados a este medio, fuentes judiciales y fuerzas de seguridad.
+      </section>
+    </section>
+  </div>
+
+  <!-- GUÍA RÁPIDA (comentarios) 
+    ▶ Cómo usar
+      1) Reemplace títulos y textos del header.
+      2) Cambie los valores de KPI (.value) y, si quiere, el color del cambio (clases .up/.down/.flat).
+      3) Ajuste los anchos de las barras editando style="width:%" y la altura de columnas en style="height:%".
+      4) Edite la cronología en la sección .timeline.
+      5) Modifique la paleta en :root (—brand, —accent, etc.).
+      6) Para insertar en WordPress, use un bloque HTML personalizado.
+  -->
+</body>
+</html>
